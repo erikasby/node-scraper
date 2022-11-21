@@ -1,0 +1,25 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 20rem;
+    width: 90%;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.password-separator {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.password-separator > label {
+    margin-bottom: 0;
+}
+
+.form__additional-link--login {
+    margin-top: 1rem;
+}

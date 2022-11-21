@@ -1,0 +1,14 @@
+.register {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 20rem;
+    width: 90%;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.form__additional-link--register {
+    margin-top: 1rem;
+}

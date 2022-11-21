@@ -1,0 +1,12 @@
+<% cards.forEach(card => { %>
+<section class="info-card">
+    <div class="info-card__container hidden">
+        <img src="/illustrations/<%= card.img %>" alt="<%= card.heading %>" class="info-card__img" />
+        <div class="info-card__text-wrapper">
+            <h1 class="info-card__main-heading"><%= card.heading %></h1>
+            <p class="info-card__paragraph"><%= card.paragraph %></p>
+            <a href="/register" class="button">Learn more</a>
+        </div>
+    </div>
+</section>
+<% }) %>

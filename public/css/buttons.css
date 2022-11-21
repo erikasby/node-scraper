@@ -1,0 +1,101 @@
+.button {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--neutral-50);
+    padding: 1rem 1.5rem;
+    background-color: var(--blue-500);
+    border-radius: 0.5rem;
+    border: none;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.button--small {
+    padding: 0.5rem 1rem;
+}
+
+.button--tiny {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+}
+
+.button--large {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.button:hover,
+.button:active,
+.button:focus {
+    background-color: var(--blue-400);
+}
+
+.button--orange {
+    background-color: var(--orange-500);
+}
+
+.button--orange:hover,
+.button--orange:active,
+.button--orange:focus {
+    background-color: var(--orange-400);
+}
+
+.button--red {
+    background-color: var(--red-500);
+}
+
+.button--red:hover,
+.button--red:active,
+.button--red:focus {
+    background-color: var(--red-400);
+}
+
+.button--transparent {
+    background-color: var(--neutral-150);
+    color: var(--neutral-950);
+}
+
+.button--transparent:hover,
+.button--transparent:active,
+.button--transparent:focus {
+    background-color: var(--neutral-200);
+}
+
+.button.button--unliked {
+    background-color: transparent;
+    color: var(--neutral-500);
+    font-weight: 500;
+    font-size: 1rem;
+    outline: none;
+}
+
+.button.button--unliked:hover,
+.button.button--unliked:active {
+    background-color: transparent;
+    outline: none;
+}
+
+.button.button--unliked:focus {
+    background-color: var(--neutral-200);
+    outline: none;
+}
+
+.button.button--liked {
+    background-color: transparent;
+    color: var(--red-500);
+    font-weight: 500;
+    font-size: 1rem;
+    outline: none;
+}
+
+.button.button--liked:hover,
+.button.button--liked:active {
+    color: var(--red-500);
+    background-color: transparent;
+    outline: none;
+}
+
+.button.button--liked:focus {
+    background-color: var(--red-100);
+    outline: none;
+}

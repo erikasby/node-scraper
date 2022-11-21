@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,700&display=swap');
+
+.header {
+    background-color: var(--neutral-50);
+    border-bottom: 1px solid var(--neutral-200);
+    position: relative;
+}
+
+.header__container {
+    margin: 0 auto;
+    max-width: 100rem;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem 0;
+}
+
+.logo {
+    display: flex;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.logo__bay,
+.logo__bank {
+    font-family: inherit;
+    color: var(--blue-500);
+}
+
+.nav {
+    display: flex;
+}
+
+.nav__links {
+    list-style-type: none;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.nav__link,
+.user__login,
+.user__logout,
+.user__register,
+.header__hamburger {
+    display: block;
+    color: var(--neutral-950);
+    font-weight: 400;
+    transition: color 0.2s;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+    width: max-content;
+}
+
+.header__hamburger {
+    display: none;
+    padding: 0.25rem 0.75rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.45rem;
+}
+
+.nav__link:hover,
+.nav__link:active,
+.nav__link:focus,
+.user__logout:hover,
+.user__logout:active,
+.user__logout:focus,
+.user__login:hover,
+.user__login:active,
+.user__login:focus,
+.user__register:hover,
+.user__register:active,
+.user__register:focus,
+.header__hamburger:focus,
+.header__hamburger:active,
+.header__hamburger:hover {
+    background-color: var(--neutral-100);
+}
+
+.user {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+.nav.nav--active,
+.user.user--active {
+    display: flex;
+}
+
+@media screen and (max-width: 67rem) {
+    .header__container {
+        flex-direction: column;
+        height: max-content;
+        align-items: center;
+        justify-content: start;
+    }
+
+    .nav__links {
+        margin-top: 0.5rem;
+    }
+
+    .header__hamburger {
+        display: block;
+    }
+
+    .nav {
+        display: none;
+        align-self: start;
+    }
+
+    .nav,
+    .nav__links,
+    .user,
+    .nav__link,
+    .user__logout,
+    .user__login,
+    .user__register {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .nav__links,
+    .user {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .nav__link {
+        padding-bottom: 0.5rem;
+    }
+
+    .nav__links:first-child > li:first-child > .nav__link,
+    .nav__link,
+    .user__login,
+    .user__logout,
+    .user__register {
+        border-bottom: 1px solid var(--neutral-100);
+        border-radius: 0;
+        font-size: 1rem;
+    }
+
+    .user {
+        display: none;
+        align-self: start;
+        margin-bottom: 0.5rem;
+    }
+
+    .user__register,
+    .user__logout {
+        border-bottom: 0;
+    }
+}

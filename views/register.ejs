@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('includes/head.ejs') %>
+        <link rel="stylesheet" href="/css/forms.css" />
+        <link rel="stylesheet" href="/css/register.css" />
+        <script src="/js/validation.js" defer></script>
+        <title><%= title %></title>
+    </head>
+    <body>
+        <%- include('includes/header.ejs', {active: active}) %>
+        <main class="main">
+            <section class="register">
+                <form class="form" action="/register" method="POST" novalidate>
+                    <label class="form__label" for="email">Email</label>
+                    <p class="form__error"></p>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="john@example.com"
+                        class="form__input"
+                        minlength="6"
+                        maxlength="40"
+                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+                        required
+                    />
+                    <label class="form__label" for="username">Username</label>
+                    <p class="form__error"></p>
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Johnny1"
+                        class="form__input"
+                        pattern="[A-Za-z0-9]{3,20}"
+                        required
+                    />
+                    <label class="form__label" for="password">Password</label>
+                    <p class="form__error"></p>
+                    <!--
+                        Must include:
+                            1 Uppercase
+                            1 Lowercase
+                            1 Number
+                            1 Symbol (!@#$%^&*_=+-)
+                            6-30 characters 
+                    -->
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="••••••"
+                        class="form__input"
+                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{6,30}$"
+                        required
+                    />
+                    <label class="form__label" for="repeatPassword">Repeat password</label>
+                    <p class="form__error"></p>
+                    <input
+                        type="password"
+                        id="repeatPassword"
+                        name="repeatPassword"
+                        placeholder="••••••"
+                        class="form__input"
+                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{6,30}$"
+                        required
+                    />
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                    <button type="submit" class="button button--small">Register</button>
+                </form>
+                <a href="/login" class="form__additional-link form__additional-link--register"
+                    >Already have an account?</a
+                >
+            </section>
+        </main>
+        <%- include('includes/footer.ejs') %>
+    </body>
+</html>

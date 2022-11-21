@@ -1,0 +1,26 @@
+.almost-footer {
+    padding: 4rem 0;
+    background-color: var(--neutral-100);
+}
+
+.almost-footer__container {
+    margin: 0 auto;
+    max-width: 70rem;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.almost-footer__heading {
+    font-size: 2.5rem;
+    color: var(--blue-500);
+    line-height: 1.1;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.almost-footer__button {
+    margin: 0 auto;
+}

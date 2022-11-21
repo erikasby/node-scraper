@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('includes/head.ejs') %>
+        <link rel="stylesheet" href="/css/articles.css" />
+        <link rel="stylesheet" href="/css/editor-header.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+            integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <script src="/js/article-control.js" defer></script>
+        <title><%= title %></title>
+    </head>
+    <body>
+        <!-- prettier-ignore -->
+        <%- include('includes/header.ejs', {active: active}) %>
+        <%- include('includes/editor-header.ejs', {active: active}) %>
+        <main class="main">
+            <article class="article">
+                <div class="article__container">
+                    <% if (edit) { %>
+                    <div class="article__editor">
+                        <a class="edit-button button button--tiny button--orange" href="/news/<%= article._id %>/edit"
+                            >Edit</a
+                        >
+                        <button class="delete-button button button--tiny button--red" type="button">Delete</button>
+                    </div>
+                    <% } %>
+                    <div class="article__header">
+                        <% if (article.author.pictureLink) { %>
+                        <img
+                            class="article__pictureLink"
+                            src="<%= article.author.pictureLink %>"
+                            alt="Profile picture"
+                        />
+                        <% } else { %>
+                        <div class="article__pictureLink"></div>
+                        <% } %>
+                        <div class="article__data">
+                            <div class="article__split">
+                                <p class="article__username"><%= article.author.username %></p>
+                                <div class="article__watches">
+                                    <i class="fa-solid fa-eye"></i> <%= article.watchCount %>
+                                </div>
+                                <div class="article__likes">
+                                    <i class="fa-solid fa-heart"></i> <%= article.likesCount%>
+                                </div>
+                            </div>
+                            <div class="article__split">
+                                <p class="article__updatedAt"><%= article.updatedAt.toDateString() %></p>
+                                <p class="article__sub-category"><%= article.subCategory %></p>
+                            </div>
+                        </div>
+                    </div>
+                    <h1 class="article__title"><%= article.title %></h1>
+                    <h2 class="article__secondary-title"><%= article.secondaryTitle %></h2>
+                    <img class="article__imageLink" src="<%= article.imageLink %>" alt="<%= article.title %>" />
+                    <div class="article__content"><%- article.content %></div>
+                    <button
+                        type="button"
+                        class="button button--small <%= Object.values(article.likedBy).includes(article.author._id) ? 'button--liked' : 'button--unliked' %> article__likesCount"
+                    >
+                        <i class="fa-solid fa-heart"></i> <%= article.likesCount %>
+                    </button>
+                </div>
+            </article>
+        </main>
+        <%- include('includes/footer.ejs') %>
+    </body>
+</html>

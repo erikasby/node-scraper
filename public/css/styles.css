@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* All colors are taken from Tailwind Colors docs */
+:root {
+    /* Blue - Main color is 500 */
+    --blue-50: hsl(217, 89%, 95%);
+    --blue-100: hsl(217, 89%, 90%);
+    --blue-150: hsl(217, 89%, 85%);
+    --blue-200: hsl(217, 89%, 80%);
+    --blue-250: hsl(217, 89%, 75%);
+    --blue-300: hsl(217, 89%, 70%);
+    --blue-350: hsl(217, 89%, 65%);
+    --blue-400: hsl(217, 89%, 60%);
+    --blue-450: hsl(217, 89%, 55%);
+    --blue-500: hsl(217, 89%, 50%);
+    --blue-550: hsl(217, 89%, 45%);
+    --blue-600: hsl(217, 89%, 40%);
+    --blue-650: hsl(217, 89%, 35%);
+    --blue-700: hsl(217, 89%, 30%);
+    --blue-750: hsl(217, 89%, 25%);
+    --blue-800: hsl(217, 89%, 20%);
+    --blue-850: hsl(217, 89%, 15%);
+    --blue-900: hsl(217, 89%, 10%);
+    --blue-950: hsl(217, 89%, 5%);
+
+    /* Red*/
+    --red-50: hsl(5, 69%, 95%);
+    --red-100: hsl(5, 69%, 90%);
+    --red-150: hsl(5, 69%, 85%);
+    --red-200: hsl(5, 69%, 80%);
+    --red-250: hsl(5, 69%, 75%);
+    --red-300: hsl(5, 69%, 70%);
+    --red-350: hsl(5, 69%, 65%);
+    --red-400: hsl(5, 69%, 60%);
+    --red-450: hsl(5, 69%, 55%);
+    --red-500: hsl(5, 69%, 50%);
+    --red-550: hsl(5, 69%, 45%);
+    --red-600: hsl(5, 69%, 40%);
+    --red-650: hsl(5, 69%, 35%);
+    --red-700: hsl(5, 69%, 30%);
+    --red-750: hsl(5, 69%, 25%);
+    --red-800: hsl(5, 69%, 20%);
+    --red-850: hsl(5, 69%, 15%);
+    --red-900: hsl(5, 69%, 10%);
+    --red-900: hsl(5, 69%, 5%);
+
+    /* Orange */
+    --orange-50: hsl(43, 83%, 95%);
+    --orange-100: hsl(43, 83%, 90%);
+    --orange-150: hsl(43, 83%, 85%);
+    --orange-200: hsl(43, 83%, 80%);
+    --orange-250: hsl(43, 83%, 75%);
+    --orange-300: hsl(43, 83%, 70%);
+    --orange-350: hsl(43, 83%, 65%);
+    --orange-400: hsl(43, 83%, 60%);
+    --orange-450: hsl(43, 83%, 55%);
+    --orange-500: hsl(43, 83%, 50%);
+    --orange-550: hsl(43, 83%, 45%);
+    --orange-600: hsl(43, 83%, 43%);
+    --orange-650: hsl(43, 83%, 35%);
+    --orange-700: hsl(43, 83%, 30%);
+    --orange-750: hsl(43, 83%, 25%);
+    --orange-800: hsl(43, 83%, 20%);
+    --orange-850: hsl(43, 83%, 15%);
+    --orange-900: hsl(43, 83%, 10%);
+    --orange-950: hsl(43, 83%, 5%);
+
+    /* Neutral */
+    --neutral-50: hsl(0, 0%, 95%);
+    --neutral-100: hsl(0, 0%, 90%);
+    --neutral-150: hsl(0, 0%, 85%);
+    --neutral-200: hsl(0, 0%, 80%);
+    --neutral-250: hsl(0, 0%, 75%);
+    --neutral-300: hsl(0, 0%, 70%);
+    --neutral-350: hsl(0, 0%, 65%);
+    --neutral-400: hsl(0, 0%, 60%);
+    --neutral-450: hsl(0, 0%, 55%);
+    --neutral-500: hsl(0, 0%, 50%);
+    --neutral-550: hsl(0, 0%, 45%);
+    --neutral-600: hsl(0, 0%, 40%);
+    --neutral-650: hsl(0, 0%, 35%);
+    --neutral-700: hsl(0, 0%, 30%);
+    --neutral-750: hsl(0, 0%, 25%);
+    --neutral-800: hsl(0, 0%, 20%);
+    --neutral-850: hsl(0, 0%, 15%);
+    --neutral-900: hsl(0, 0%, 10%);
+    --neutral-950: hsl(0, 0%, 5%);
+}
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Reset start */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*:focus {
+    outline: none;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+    text-decoration: none;
+}
+
+/* Remove arrows from type="number" input */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+/* Reset end */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background-color: var(--neutral-100);
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+}
+
+.active {
+    color: var(--blue-500);
+}
+
+.main {
+    justify-self: start;
+}
+
+.page-not-found__img {
+    margin: 0 auto;
+    max-width: 50rem;
+    width: 100%;
+}
+
+.spinner {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 3px solid var(--blue-100);
+    border-radius: 50%;
+    border-top-color: var(--blue-500);
+    animation: spin 1s infinite;
+    -webkit-animation: spin 1s infinite;
+}
+
+@keyframes spin {
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}

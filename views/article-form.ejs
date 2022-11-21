@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('includes/head.ejs') %>
+        <link rel="stylesheet" href="/css/forms.css" />
+        <link rel="stylesheet" href="/css/article-form.css" />
+        <script src="/js/validation.js" defer></script>
+        <script src="/js/textarea-autoresize.js" defer></script>
+        <title><%= title %></title>
+    </head>
+    <body>
+        <%- include('includes/header.ejs', {active: active}) %>
+        <main class="main">
+            <section class="article-form">
+                <% if (isEdit) { %>
+                <form class="form" action="/news/<%= article._id %>/edit" method="POST" novalidate>
+                <% } else { %>
+                <form class="form" action="/news/new" method="POST" novalidate>
+                <% } %> 
+                    <label class="form__label" for="title">Title</label>
+                    <p class="form__error"></p>
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        class="form__input"
+                        <% if(isEdit) { %>
+                        value="<%= article.title %>"
+                        <% } %> 
+                        required
+                    >
+                    </input>
+                    <label class="form__label" for="secondaryTitle">Secondary title</label>
+                    <p class="form__error"></p>
+                    <input
+                        type="text"
+                        id="secondaryTitle"
+                        name="secondaryTitle"
+                        class="form__input"
+                        <% if(isEdit) { %>
+                        value="<%= article.secondaryTitle %>"
+                        <% } %> 
+                        required
+                    >
+                    </input>
+                    <label class="form__label" for="category">Category</label>
+                    <p class="form__error"></p>
+                    <input
+                        type="text"
+                        id="category"
+                        name="category"
+                        class="form__input"
+                        <% if(isEdit) { %>
+                        value="<%= article.category %>"
+                        <% } %> 
+                        required
+                    >
+                    </input>
+                    <label class="form__label" for="subCategory">Subcategory</label>
+                    <p class="form__error"></p>
+                    <input
+                        type="text"
+                        id="subCategory"
+                        name="subCategory"
+                        class="form__input"
+                        <% if(isEdit) { %>
+                        value="<%= article.subCategory %>"
+                        <% } %> 
+                        required
+                    >
+                    </input>
+                    <label class="form__label" for="imageLink">Image link</label>
+                    <p class="form__error"></p>
+                    <input
+                        type="text"
+                        id="imageLink"
+                        name="imageLink"
+                        class="form__input"
+                        <% if(isEdit) { %>
+                        value="<%= article.imageLink %>"
+                        <% } %> 
+                        required
+                    >
+                    </input>
+                    <label class="form__label" for="articleContent">Article content (Written in Markdown)</label>
+                    <p class="form__error"></p>
+                    <textarea
+                        id="articleContent"
+                        name="articleContent"
+                        class="form__input"
+                        required
+                        contenteditable
+                        style="resize: none; overflow: hidden; min-height: 8rem; height: max-content;"
+                    ><% if(isEdit) { %><%= article.content %><% } %></textarea>
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button type="submit" class="button button--small"><%= isEdit ? "Update" : "Create" %></button>
+                </form>
+            </section>
+        </main>
+        <%- include('includes/footer.ejs') %>
+    </body>
+</html>

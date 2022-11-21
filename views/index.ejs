@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('includes/head.ejs') %>
+        <link rel="stylesheet" href="/css/hero.css" />
+        <link rel="stylesheet" href="/css/info-card.css" />
+        <link rel="stylesheet" href="/css/almost-footer.css" />
+        <script src="/js/reveal-animation.js" defer></script>
+        <title><%= title %></title>
+    </head>
+    <body>
+        <!-- prettier-ignore -->
+        <%- include('includes/header.ejs', {active: active}) %>
+        <main class="main">
+            <!-- prettier-ignore -->
+            <%- include('includes/hero.ejs') %>
+            <%- include('includes/info-card.ejs', {cards: cards}) %>
+            <%- include('includes/almost-footer.ejs') %>
+        </main>
+        <%- include('includes/footer.ejs') %>
+    </body>
+</html>
