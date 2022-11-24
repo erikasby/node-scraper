@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('includes/head.ejs') %>
+        <link rel="stylesheet" href="/css/articles.css" />
+        <link rel="stylesheet" href="/css/editor-header.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+            integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <script src="/js/load-more-news.js" defer></script>
+        <title><%= title %></title>
+    </head>
+    <body>
+        <!-- prettier-ignore -->
+        <%- include('includes/header.ejs', {active: active}) %>
+        <%- include('includes/editor-header.ejs', {active: active}) %>
+        <main class="main">
+            <div class="articles">
+                <section class="articles__articles">
+                    <!-- prettier-ignore -->
+                    <%- include('includes/article.ejs') %>
+                </section>
+                <div class="articles__load-container">
+                <% if (articles.length < 9) { %>
+                    <p class="articles__nothing"><em>Yet to be more articles.</em></p>
+                <% } else { %>
+                    <button type="button" class="button button--small button--transparent load-more doc-<%= lastArticleId %>">
+                        Load more...
+                    </button>
+                <% } %>
+                </div>
+            </div>
+            </div>
+        </main>
+        <%- include('includes/footer.ejs') %>
+    </body>
+</html>
