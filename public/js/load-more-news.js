@@ -48,31 +48,23 @@ function generateHtmlForArticle(articles, article) {
     const newArticle = document.createElement('article');
     newArticle.classList.add('articles__article');
 
-    article.updatedAt = new Date(article.updatedAt).toDateString();
-
     newArticle.innerHTML = `
     <div class="article__header">
-    ${
-        article.author.pictureLink
-            ? '<img class="article__pictureLink" src="${article.author.pictureLink}" alt="Profile picture" />'
-            : '<div class="article__pictureLink"></div>'
-    }
+    ${article.image ? '<img class="article__pictureLink"/>' : '<div class="article__pictureLink"></div>'}
         <div class="article__data">
             <div class="article__split">
-                <p class="article__username">${article.author.username}</p>
+                <p class="article__username">${article.company}</p>
                 <div class="article__watches"><i class="fa-solid fa-eye"></i> ${article.watchCount}</div>
                 <div class="article__likes"><i class="fa-solid fa-heart"></i> ${article.likesCount}</div>
             </div>
             <div class="article__split">
-                <p class="article__updatedAt">${article.updatedAt}</p>
-                <p class="article__sub-category">${article.subCategory}</p>
+                <p class="article__updatedAt">${article.date}</p>
             </div>
         </div>
     </div>
-    <img class="articles__img" src="${article.imageLink}" alt="" />
+    <img class="articles__img" src="${article.image}" alt="" />
     <h2 href="#" class="articles__article-title">${article.title}</h2>
-    <h3 href="#" class="articles__article-secondary-title">${article.secondaryTitle}</h3>
-    <a href="/news/press/${article._id}" class="articles__link button button--small doc-${article._id}">Learn more</a>
+    <a href="${article.href}" class="articles__link button button--small doc-${article._id}">Learn more</a>
         `;
 
     articles.appendChild(newArticle);

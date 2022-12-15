@@ -7,6 +7,7 @@ const articleController = require('../controllers/articles/articleController');
 const articleAdminController = require('../controllers/articles/articleAdminController');
 const articleHelpers = require('../controllers/articles/articleHelpers');
 const authController = require('../controllers/authController');
+const websitesController = require('../controllers/websitesController');
 
 const isLoggedIn = require('../middlewares/isLoggedIn');
 const isLoggedOut = require('../middlewares/isLoggedOut');
@@ -32,6 +33,8 @@ router.get('/news/technology', articleController.getTechnology);
 router.get('/news/technology/:articleId', articleController.getTechnologyArticle);
 router.get('/news/lifestyle', articleController.getLifestyle);
 router.get('/news/lifestyle/:articleId', articleController.getLifestyleArticle);
+
+router.get('/news/', websitesController.getNewsArticles);
 
 // Article interactions
 // router.get('/news/:articleId/likes', articleController.getArticleLikes);

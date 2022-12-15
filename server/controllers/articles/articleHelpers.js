@@ -1,6 +1,6 @@
 'use strict';
 
-const Article = require('../../models/Article');
+const NewsArticle = require('../../models/NewsArticle');
 const User = require('../../models/User');
 
 exports.loadMoreNews = async (req, res, next) => {
@@ -9,16 +9,14 @@ exports.loadMoreNews = async (req, res, next) => {
     // const category = req.headers.split('/').pop();
     // const categoryCapitalized = category.charAt(0).toUpperCase() + category.slice(1);
 
-    const articles = await Article.find({_id: {$lt: lastArticleId}})
-        .sort({_id: -1})
-        .populate({
-            path: 'author',
-            model: 'User',
-        })
+    //
+    // I should safe all needed ids and search by Not equals mongoose and sort by date afterwards
+    //
+
+    const newsArticles = await NewsArticle.find({date: {$lte: lastArticleId}})
+        .sort({date: -1})
         .limit(9)
         .exec();
 
-    res.json(articles);
-
-    console.log(articles);
+    res.json(newsArticles);
 };

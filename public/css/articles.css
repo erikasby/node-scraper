@@ -76,6 +76,7 @@
 
 .articles__link {
     text-align: center;
+    margin-top: auto;
 }
 
 .articles__load-container {

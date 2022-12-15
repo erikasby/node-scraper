@@ -1,28 +1,24 @@
 <% articles.forEach(article => { %>
 <article class="articles__article">
     <div class="article__header">
-        <% if (article.author.pictureLink) { %>
-        <img class="article__pictureLink" src="<%= article.author.pictureLink %>" alt="Profile picture" />
+        <% if (!article) { %>
+        <img class="article__pictureLink" src="<%= article.image %>" alt="Profile picture" />
         <% } else { %>
         <div class="article__pictureLink"></div>
         <% } %>
         <div class="article__data">
             <div class="article__split">
-                <p class="article__username"><%= article.author.username %></p>
+                <p class="article__username"><%= article.company %></p>
                 <div class="article__watches"><i class="fa-solid fa-eye"></i> <%= article.watchCount %></div>
                 <div class="article__likes"><i class="fa-solid fa-heart"></i> <%= article.likesCount%></div>
             </div>
             <div class="article__split">
-                <p class="article__updatedAt"><%= article.updatedAt.toDateString() %></p>
-                <p class="article__sub-category"><%= article.subCategory %></p>
+                <p class="article__updatedAt"><%= article.date.toDateString() %></p>
             </div>
         </div>
     </div>
-    <img class="articles__img" src="<%= article.imageLink %>" alt="" />
+    <img class="articles__img" src="<%= article.image %>" alt="" />
     <h2 href="#" class="articles__article-title"><%= article.title %></h2>
-    <h3 href="#" class="articles__article-secondary-title"><%= article.secondaryTitle %></h3>
-    <a href="/news/press/<%= article._id %>" class="articles__link button button--small doc-<%= article._id %>"
-        >Learn more</a
-    >
+    <a href="<%= article.href %>" class="articles__link button button--small doc-<%= article._id %>">Learn more</a>
 </article>
 <% }) %>

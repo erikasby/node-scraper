@@ -3,6 +3,13 @@
 const Article = require('../../models/Article');
 const User = require('../../models/User');
 
+const amazon = require('../websites/amazon');
+const facebook = require('../websites/facebook');
+const linkedin = require('../websites/linkedin');
+const microsoft = require('../websites/microsoft');
+const spotify = require('../websites/spotify');
+const zalando = require('../websites/zalando');
+
 // GET Article
 exports.getPressArticle = async (req, res, next) => renderArticle(req, res, next, '/news/press', 'Press');
 exports.getBusinessArticle = async (req, res, next) => renderArticle(req, res, next, '/news/business', 'Business');
@@ -30,6 +37,14 @@ const renderArticles = async (req, res, next, path, category) => {
 
         let lastArticleId;
         if (articles.length > 0) lastArticleId = articles[articles.length - 1]._id;
+
+        // TO DELETE
+        amazon.getData();
+        facebook.getData();
+        linkedin.getData();
+        microsoft.getData();
+        spotify.getData();
+        zalando.getData();
 
         res.render('articles', {
             title: category + ' | BayBank - the best solution for both individuals and companies',
