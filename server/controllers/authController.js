@@ -40,6 +40,8 @@ exports.postLogin = async (req, res, next) => {
         const username = req.body.username;
         const password = req.body.password;
 
+        console.log(password);
+
         const isValidated = validateLogin(username, password);
 
         if (isValidated) {

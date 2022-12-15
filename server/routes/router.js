@@ -46,6 +46,6 @@ router.get('/news/:id/edit', isLoggedOut, isAdmin, articleAdminController.getEdi
 router.post('/news/:id/edit', isLoggedOut, isAdmin, articleAdminController.postEditArticle);
 
 // APIs
-router.get('/api/load-more-news', isLoggedIn, articleHelpers.loadMoreNews);
+router.get('/api/load-more-news', articleHelpers.loadMoreNews);
 
 module.exports = router;

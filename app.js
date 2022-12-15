@@ -11,7 +11,7 @@ const User = require('./server/models/User');
 const csrfProtection = csrf();
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 
 const store = new MongoDBStore({
     uri: process.env.MONGODB_URI,

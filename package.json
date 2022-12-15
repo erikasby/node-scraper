@@ -1,5 +1,5 @@
 {
-    "name": "baybank",
+    "name": "node-scraper",
     "version": "1.0.0",
     "description": "BayBank - This project is the implementation of the tasks given by the work which were required by the college. Additionally, this was the project for my bachelor's.",
     "main": "app.js",

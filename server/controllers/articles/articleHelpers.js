@@ -6,10 +6,10 @@ const User = require('../../models/User');
 exports.loadMoreNews = async (req, res, next) => {
     let lastArticleId = req.query.doc;
 
-    const category = req.headers.referer.split('/').pop();
-    const categoryCapitalized = category.charAt(0).toUpperCase() + category.slice(1);
+    // const category = req.headers.split('/').pop();
+    // const categoryCapitalized = category.charAt(0).toUpperCase() + category.slice(1);
 
-    const articles = await Article.find({category: categoryCapitalized, _id: {$lt: lastArticleId}})
+    const articles = await Article.find({_id: {$lt: lastArticleId}})
         .sort({_id: -1})
         .populate({
             path: 'author',
@@ -19,4 +19,6 @@ exports.loadMoreNews = async (req, res, next) => {
         .exec();
 
     res.json(articles);
+
+    console.log(articles);
 };

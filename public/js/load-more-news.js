@@ -11,11 +11,8 @@ async function loadMoreNews() {
         // This variable holds ID of the last article on the page, it is needed for fetching next 9 articles
         const lastArticleId = getClassNameFromButton(button, 'doc-');
 
-        console.log(lastArticleId);
-
         const url = `/api/load-more-news?doc=${lastArticleId}`;
 
-        await fetch(url);
         const res = await fetch(url);
         const data = await res.json();
 
