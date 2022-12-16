@@ -12,14 +12,14 @@ const User = require('../models/User');
 exports.getNewsArticles = async (req, res, next) => renderArticles(req, res, next, '/news/', 'News');
 
 // Helper functions
-const renderArticles = async (req, res, next, path, category) => {
+const renderArticles = async (req, res, next, path, title) => {
     try {
-        const newsArticles = await NewsArticle.find().sort({date: -1}).limit(9).exec();
+        const newsArticles = await NewsArticle.find().sort({date: -1}).limit(15).exec();
 
-        let lastArticleId;
-        if (newsArticles.length > 0) lastArticleId = newsArticles[newsArticles.length - 1].date;
+        // let lastArticleId;
+        // if (newsArticles.length > 0) lastArticleId = newsArticles[newsArticles.length - 1].date;
 
-        // TO DELETE
+        // TO MAKE AUTONOMOUS EVERYDAY
         // amazon.getData();
         // facebook.getData();
         // linkedin.getData();
@@ -28,11 +28,11 @@ const renderArticles = async (req, res, next, path, category) => {
         // zalando.getData();
 
         res.render('articles', {
-            title: category + ' | BayBank - the best solution for both individuals and companies',
+            title: title + ' | BayBank - the best solution for both individuals and companies',
             path: path,
-            active: category,
+            active: title,
             articles: newsArticles,
-            lastArticleId: lastArticleId,
+            // lastArticleId: lastArticleId,
         });
     } catch (error) {
         console.log(error);

@@ -1,0 +1,4 @@
+1. Add live sorting
+2. Add "favorite" functionality and page to save it
+3. Add ability for admins see newly scraped articles and either Approve them or Remove them
+4. Add ability to automatically scrape new articles every 24 hours

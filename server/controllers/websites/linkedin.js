@@ -12,29 +12,37 @@ exports.getData = async () => {
             href: e.querySelector('.post-thumb a').href,
             date: e.querySelector('.timestamp').innerText,
             title: e.querySelector('.heading-link').innerText,
-            image: e.querySelector('.img-facade').dataBackgroundSrc,
+            image: e.querySelector('.img-facade').getAttribute('data-background-src'),
             company: 'LinkedIn',
         })),
     );
+
+    console.log(newsArticles);
 
     newsArticles.forEach(async (newsArticle) => {
         try {
             const found = await NewsArticle.exists({title: newsArticle.title});
 
+            console.log(newsArticles.image);
+
             if (!found) {
                 // articleContent = parseAndSanitizeMarkdownToHTML(articleContent);
+
+                if (newsArticle.image.includes(',') || newsArticle.image.includes(';'))
+                    newsArticle.image = '/img/einstein-0.jpg';
 
                 const newNewsArticle = NewsArticle.create(
                     {
                         href: newsArticle.href,
                         date: newsArticle.date,
                         title: newsArticle.title,
-                        image: newsArticle.image,
+                        image: `https://engineering.linkedin.com${newsArticle.image}`,
                         company: newsArticle.company,
                     },
                     (error, doc) => {
                         // if (error) res.redirect('/');
                         // else res.redirect(`/`);
+                        console.log(error);
                     },
                 );
             } else {

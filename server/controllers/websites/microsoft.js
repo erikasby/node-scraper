@@ -28,6 +28,11 @@ exports.getData = async () => {
             if (!found) {
                 // articleContent = parseAndSanitizeMarkdownToHTML(articleContent);
 
+                if (newsArticle.image.includes(',') || newsArticle.image.includes(';'))
+                    newsArticle.image = '/img/einstein-0.jpg';
+
+                    console.log(newsArticle.image);
+
                 const newNewsArticle = NewsArticle.create(
                     {
                         href: newsArticle.href,

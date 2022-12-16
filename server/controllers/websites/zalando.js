@@ -12,7 +12,7 @@ exports.getData = async () => {
             href: e.querySelector('.title a').href,
             date: e.querySelector('abbr').title,
             title: e.querySelector('.title a').innerText,
-            image: '',
+            image: ',',
             company: 'Zalando',
         })),
     );
@@ -23,6 +23,11 @@ exports.getData = async () => {
 
             if (!found) {
                 // articleContent = parseAndSanitizeMarkdownToHTML(articleContent);
+
+                if (newsArticle.image.includes(',') || newsArticle.image.includes(';'))
+                    newsArticle.image = '/img/einstein-0.jpg';
+
+                console.log(newsArticle.image);
 
                 const newNewsArticle = NewsArticle.create(
                     {
