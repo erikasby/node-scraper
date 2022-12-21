@@ -22,16 +22,20 @@
 .editor-nav__links {
     list-style-type: none;
     display: flex;
+    flex-direction: row;
     gap: 0.5rem;
 }
 
 .editor-nav__link {
     display: block;
     color: var(--neutral-50);
+    background-color: transparent;
     font-weight: 400;
     transition: color 0.2s;
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
+    border: 0;
+    cursor: pointer;
     border-radius: 0.5rem;
     transition: background-color 0.2s;
     width: max-content;

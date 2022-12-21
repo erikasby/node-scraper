@@ -3,12 +3,15 @@
 const button = document.querySelector('.load-more');
 const articles = document.querySelector('.articles__articles');
 const articlesLoadContainer = document.querySelector('.articles__load-container');
+const sortButton = document.querySelector('select');
 
 // Count this number before every rest api call
 let currentArticleNumber = 15;
+let currentSortMethod = sortButton.value;
 // There should be a variable responsible for showing which method is used
 // let sortingBy = "Date"
 
+sortButton.addEventListener('change', () => loadMoreNews());
 button.addEventListener('click', () => loadMoreNews());
 
 async function loadMoreNews() {
@@ -16,16 +19,28 @@ async function loadMoreNews() {
         // This variable holds ID of the last article on the page, it is needed for fetching next 9 articles
         // const lastArticleId = getClassNameFromButton(button, 'doc-');
 
-        const url = `/api/load-more-news?currentArticleNumber=${currentArticleNumber}`;
+        if (currentSortMethod !== sortButton.value) currentArticleNumber = 0;
+
+        const url = `/api/load-more-news?currentArticleNumber=${currentArticleNumber}&sort=${sortButton.value}`;
 
         const res = await fetch(url);
         const data = await res.json();
-        data.forEach((article) => {
-            generateHtmlForArticle(articles, article);
-            currentArticleNumber++;
-        });
 
-        console.log(currentArticleNumber);
+        if (currentSortMethod !== sortButton.value) {
+            articles.innerHTML = '';
+
+            data.forEach((article) => {
+                generateHtmlForArticle(articles, article);
+                currentArticleNumber++;
+            });
+        } else {
+            data.forEach((article) => {
+                generateHtmlForArticle(articles, article);
+                currentArticleNumber++;
+            });
+        }
+
+        currentSortMethod = sortButton.value;
 
         // const newLastArticleId = data[data.length - 1]._id;
         // changeClassNameForButton(button, `doc-${lastArticleId}`, `doc-${newLastArticleId}`);

@@ -1,11 +1,17 @@
-<% if (isLoggedIn) { %> 
 <div class="editor-header">
     <div class="editor-header__container">
         <nav class="editor-nav">
             <ul class="editor-nav__links">
-                <li><a class="editor-nav__link <%= active === "New article" ? "active" : "" %>" href="/news/new">New article</a></li>
+                <li>
+                    <select class="editor-nav__link" name="sort" id="sort">
+                        <option value="date">Date</option>
+                        <option value="name">Name</option>
+                    </select>
+                </li>
+                <li>
+                    <a class="editor-nav__link <%= active === "New article" ? "active" : "" %>" href="/news/new">New article</a>
+                </li>
             </ul>
         </nav>
     </div>
 </div>
-<% } %>
