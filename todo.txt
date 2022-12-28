@@ -1,7 +1,7 @@
-1. Add sorting as: Date, Company
+1. Add sorting as: Date, Company ###DONE###
 2. Add "favorite" functionality and page to save it
 3. Add ability to automatically scrape new articles every 24 hours
-4. Calculate approximate reading time of every article
+4. Calculate approximate reading time of every article ###FUTURE###
 5. Add functionality to like the article, remove watchCount ability
 6. Add functionality to comment on article
 7. Add ability for admins to see newly scraped articles and either Approve them or Remove them

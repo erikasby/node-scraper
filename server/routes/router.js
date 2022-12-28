@@ -50,5 +50,8 @@ router.post('/news/:id/edit', isLoggedOut, isAdmin, articleAdminController.postE
 
 // APIs
 router.get('/api/load-more-news', articleHelpers.loadMoreNews);
+router.get('/api/get-user-info', articleHelpers.getUserInfo);
+router.get('/api/like', articleHelpers.likeArticle);
+router.get('/api/favorite', articleHelpers.favoriteArticle);
 
 module.exports = router;

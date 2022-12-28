@@ -42,8 +42,9 @@
                         <div class="article__data">
                             <div class="article__split">
                                 <p class="article__username"><%= article.author.username %></p>
-                                <div class="article__watches">
-                                    <i class="fa-solid fa-eye"></i> <%= article.watchCount %>
+
+                                <div class="article__favorites">
+                                    <i class="fa-solid fa-eye"></i> <%= article.watchCount %> <%= console.log(user) %>
                                 </div>
                                 <div class="article__likes">
                                     <i class="fa-solid fa-heart"></i> <%= article.likesCount%>

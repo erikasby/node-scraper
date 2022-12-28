@@ -15,6 +15,9 @@ exports.getNewsArticles = async (req, res, next) => renderArticles(req, res, nex
 const renderArticles = async (req, res, next, path, title) => {
     try {
         const newsArticles = await NewsArticle.find().sort({date: -1}).limit(15).exec();
+        const user = await User.findOne({_id: req.session.user._id});
+
+        console.log(user);
 
         // let lastArticleId;
         // if (newsArticles.length > 0) lastArticleId = newsArticles[newsArticles.length - 1].date;
@@ -32,6 +35,7 @@ const renderArticles = async (req, res, next, path, title) => {
             path: path,
             active: title,
             articles: newsArticles,
+            user: user,
             // lastArticleId: lastArticleId,
         });
     } catch (error) {

@@ -149,11 +149,21 @@
     flex-direction: column;
     height: 100%;
     justify-content: space-between;
+    width: 100%;
 }
 
 .article__split {
     display: flex;
     flex-direction: row;
+    gap: 1rem;
+}
+
+.article__options {
+    justify-content: space-between;
+}
+
+.article__additionals {
+    display: flex;
     gap: 1rem;
 }
 
@@ -175,18 +185,20 @@
 
 .article__updatedAt,
 .article__sub-category,
-.article__watches,
+.article__favorites,
 .article__likes {
     font-size: 0.8rem;
     color: var(--neutral-500);
+    border: 0;
 }
 
-.article__watches,
+.article__favorites,
 .article__likes {
     font-weight: 500;
+    cursor: pointer;
 }
 
-.article__watches {
+.article__favorites {
     color: var(--blue-500);
 }
 

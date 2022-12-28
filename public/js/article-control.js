@@ -1,49 +1,34 @@
 'use strict';
 
-const likesButton = document.querySelector('.article__likesCount');
-const likes = document.querySelector('.article__likes');
-const likesCount = likesButton.textContent.trim();
+const articlesComponent = document.querySelector('.articles__articles');
 
-const iconHTML = `<i class="fa-solid fa-heart"></i>`;
+articlesComponent.addEventListener('click', async (e) => {
+    const reactionButton = e.target;
+    const article = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
+    const learnMoreButton = article.children[3];
+    const documentId = learnMoreButton.className.split(' ')[0].split('-')[1];
 
-// Fix the whole evalutation system
+    console.log(documentId);
 
-likesButton.addEventListener('click', (event) => {
-    useButton(likes, likesButton, temporaryLikeCountButton, 'like');
+    if (reactionButton.className.includes('heart')) {
+        const url = `/api/like?articleId=${documentId}`;
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (data === 'Added') {
+            reactionButton.className = 'fa-solid fa-heart';
+        } else if (data === 'Removed') {
+            reactionButton.className = 'fa-regular fa-heart';
+        }
+    } else if (reactionButton.className.includes('star')) {
+        const url = `/api/favorite?articleId=${documentId}`;
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (data === 'Added') {
+            reactionButton.className = 'fa-solid fa-star';
+        } else if (data === 'Removed') {
+            reactionButton.className = 'fa-regular fa-star';
+        }
+    }
 });
-
-// Fix this function
-const useButton = (articleId, userId) => {
-    // if (buttonType === 'like') {
-    //     countButton.classList.toggle('button--liked');
-    //     countButton.classList.toggle('button--unliked');
-    //     buttonToCheckValues = +countButton.textContent.trim();
-    //     if (buttonToCheckValues === temporaryButton) {
-    //         countButton.innerHTML = `<i class="fa-solid fa-heart"></i> ${++buttonToCheckValues}`;
-    //         count.innerHTML = `<i class="fa-solid fa-heart"></i> ${buttonToCheckValues}`;
-    //     } else {
-    //         countButton.innerHTML = `<i class="fa-solid fa-heart"></i> ${--buttonToCheckValues}`;
-    //         count.innerHTML = `<i class="fa-solid fa-heart"></i> ${buttonToCheckValues}`;
-    //     }
-    // }
-};
-
-const postButton = (button, buttonType) => {};
-
-// const getLikesByArticleId = (articleId) => {
-//     const articlesCount = document.querySelectorAll('.articles__article').length;
-
-//     const url = `/api/load-likes?id=${articlesCount}`;
-
-//     fetch(url)
-//         .then((res) => res.text())
-//         .then((data) => console.log(data))
-//         .catch((error) => console.error(error));
-// };
-
-const postLike = (articleId, userId, button, counter) => {
-    countButton.classList.toggle('button--liked');
-    countButton.classList.toggle('button--unliked');
-};
-
-console.log(window.location.pathname.split('/').shift());

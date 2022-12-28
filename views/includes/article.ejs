@@ -7,10 +7,22 @@
         <div class="article__pictureLink"></div>
         <% } %>
         <div class="article__data">
-            <div class="article__split">
+            <div class="article__split article__options">
                 <p class="article__username"><%= article.company %></p>
-                <div class="article__watches"><i class="fa-solid fa-eye"></i> <%= article.watchCount %></div>
-                <div class="article__likes"><i class="fa-solid fa-heart"></i> <%= article.likesCount%></div>
+                <div class="article__additionals">
+                    <!-- prettier-ignore -->
+                    <% if (user && user.liked.some(id => id.articleId == article.id)) {%>
+                    <button type="button" class="article__likes"><i class="fa-solid fa-heart"></i></button>
+                    <% } else { %>
+                    <button type="button" class="article__likes"><i class="fa-regular fa-heart"></i></button>
+                    <% } %>
+                    <!-- prettier-ignore -->
+                    <% if (user && user.favorites.some(id => id.articleId == article.id)) {%>
+                    <button type="button" class="article__favorites"><i class="fa-solid fa-star"></i></button>
+                    <% } else { %>
+                    <button type="button" class="article__favorites"><i class="fa-regular fa-star"></i></button>
+                    <% } %>
+                </div>
             </div>
             <div class="article__split">
                 <p class="article__updatedAt"><%= article.date.toDateString() %></p>
@@ -19,6 +31,6 @@
     </div>
     <img class="articles__img" src="<%= article.image %>" alt="" />
     <h2 href="#" class="articles__article-title"><%= article.title %></h2>
-    <a href="<%= article.href %>" class="articles__link button button--small doc-<%= article._id %>">Learn more</a>
+    <a href="<%= article.href %>" class="doc-<%= article.id %> articles__link button button--small">Learn more</a>
 </article>
 <% }) %>

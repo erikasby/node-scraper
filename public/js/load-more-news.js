@@ -21,21 +21,26 @@ async function loadMoreNews() {
 
         if (currentSortMethod !== sortButton.value) currentArticleNumber = 0;
 
-        const url = `/api/load-more-news?currentArticleNumber=${currentArticleNumber}&sort=${sortButton.value}`;
+        const articlesUrl = `/api/load-more-news?currentArticleNumber=${currentArticleNumber}&sort=${sortButton.value}`;
+        const articlesResponse = await fetch(articlesUrl);
+        const articlesData = await articlesResponse.json();
 
-        const res = await fetch(url);
-        const data = await res.json();
+        const userUrl = `/api/get-user-info`;
+        const userResponse = await fetch(userUrl);
+        const userData = await userResponse.json();
+
+        console.log(userData);
 
         if (currentSortMethod !== sortButton.value) {
             articles.innerHTML = '';
 
-            data.forEach((article) => {
-                generateHtmlForArticle(articles, article);
+            articlesData.forEach((article) => {
+                generateHtmlForArticle(articles, article, userData);
                 currentArticleNumber++;
             });
         } else {
-            data.forEach((article) => {
-                generateHtmlForArticle(articles, article);
+            articlesData.forEach((article) => {
+                generateHtmlForArticle(articles, article, userData);
                 currentArticleNumber++;
             });
         }
@@ -46,7 +51,7 @@ async function loadMoreNews() {
         // changeClassNameForButton(button, `doc-${lastArticleId}`, `doc-${newLastArticleId}`);
         // else
 
-        if (data.length < 15)
+        if (articlesData.length < 15)
             articlesLoadContainer.innerHTML = `<p class="articles__nothing"><em>Yet to be more articles.</em></p>`;
     } catch (error) {
         console.error(error);
@@ -70,20 +75,47 @@ async function loadMoreNews() {
 //         .split('-')[1];
 // }
 
-function generateHtmlForArticle(articles, article) {
+function generateHtmlForArticle(articles, article, userData) {
     const newArticle = document.createElement('article');
     newArticle.classList.add('articles__article');
 
     article.date = new Date(article.date).toDateString();
 
+    /*
+<!-- prettier-ignore -->
+                    <% if (user && user.favorites.includes(article._id)) {%>
+                    <button type="button" class="article__likes"><i class="fa-solid fa-heart"></i></button>
+                    <% } else { %>
+                    <button type="button" class="article__likes"><i class="fa-regular fa-heart"></i></button>
+                    <% } %>
+                    <!-- prettier-ignore -->
+                    <% if (user && user.liked.includes(article._id)) {%>
+                    <button type="button" class="article__favorites"><i class="fa-solid fa-star"></i></button>
+                    <% } else { %>
+                    <button type="button" class="article__favorites"><i class="fa-regular fa-star"></i></button>
+                    <% } %>
+    */
+
+    // <% if (user && user.liked.some(id => id.articleId == article.id)) {%>
+
     newArticle.innerHTML = `
     <div class="article__header">
     ${article.image ? '<img class="article__pictureLink"/>' : '<div class="article__pictureLink"></div>'}
         <div class="article__data">
-            <div class="article__split">
+            <div class="article__split article__options">
                 <p class="article__username">${article.company}</p>
-                <div class="article__watches"><i class="fa-solid fa-eye"></i> ${article.watchCount}</div>
-                <div class="article__likes"><i class="fa-solid fa-heart"></i> ${article.likesCount}</div>
+                <div class="article__additionals">
+                    ${
+                        userData !== 'User not found' && userData.liked.some((id) => id.articleId == article._id)
+                            ? '<button type="button" class="article__likes"><i class="fa-solid fa-heart"></i></button>'
+                            : '<button type="button" class="article__likes"><i class="fa-regular fa-heart"></i></button>'
+                    }
+                    ${
+                        userData !== 'User not found' && userData.favorites.some((id) => id.articleId == article._id)
+                            ? '<button type="button" class="article__favorites"><i class="fa-solid fa-star"></i></button>'
+                            : '<button type="button" class="article__favorites"><i class="fa-regular fa-star"></i></button>'
+                    }
+                </div>
             </div>
             <div class="article__split">
                 <p class="article__updatedAt">${article.date}</p>
@@ -92,7 +124,7 @@ function generateHtmlForArticle(articles, article) {
     </div>
     <img class="articles__img" src="${article.image}" alt="" />
     <h2 href="#" class="articles__article-title">${article.title}</h2>
-    <a href="${article.href}" class="articles__link button button--small doc-${article._id}">Learn more</a>
+    <a href="${article.href}" class="doc-${article._id} articles__link button button--small">Learn more</a>
         `;
 
     articles.appendChild(newArticle);

@@ -25,3 +25,45 @@ exports.loadMoreNews = async (req, res, next) => {
 
     res.json(newsArticles);
 };
+
+exports.getUserInfo = async (req, res, next) => {
+    if (!req.session.user) res.json('User not found');
+    else {
+        const user = await User.findOne({_id: req.session.user._id});
+        res.json(user);
+    }
+};
+
+exports.favoriteArticle = async (req, res, next) => {
+    const documentId = req.query.articleId;
+    const document = await User.findOne({favorites: {articleId: documentId}});
+
+    if (req.session.user && document) {
+        await User.updateOne({$pull: {favorites: {articleId: documentId}}});
+
+        res.json('Removed');
+    } else if (req.session.user && !document) {
+        await User.updateOne({$push: {favorites: {articleId: documentId}}});
+
+        res.json('Added');
+    } else {
+        res.json('User is not logged in');
+    }
+};
+
+exports.likeArticle = async (req, res, next) => {
+    const documentId = req.query.articleId;
+    const document = await User.findOne({liked: {articleId: documentId}});
+
+    if (req.session.user && document) {
+        await User.updateOne({$pull: {liked: {articleId: documentId}}});
+
+        res.json('Removed');
+    } else if (req.session.user && !document) {
+        await User.updateOne({$push: {liked: {articleId: documentId}}});
+
+        res.json('Added');
+    } else {
+        res.json('User is not logged in');
+    }
+};

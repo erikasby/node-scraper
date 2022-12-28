@@ -19,6 +19,12 @@ const userSchema = new mongoose.Schema({
     lastName: {
         type: String,
     },
+    favorites: {
+        type: Array,
+    },
+    liked: {
+        type: Array,
+    },
     pictureLink: {
         type: String,
     },
