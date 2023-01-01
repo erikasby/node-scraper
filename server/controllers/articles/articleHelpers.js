@@ -36,14 +36,14 @@ exports.getUserInfo = async (req, res, next) => {
 
 exports.favoriteArticle = async (req, res, next) => {
     const documentId = req.query.articleId;
-    const document = await User.findOne({favorites: {articleId: documentId}});
+    const document = await User.findOne({_id: req.session.user._id, favorites: {articleId: documentId}});
 
     if (req.session.user && document) {
-        await User.updateOne({$pull: {favorites: {articleId: documentId}}});
+        await User.updateOne({_id: req.session.user._id}, {$pull: {favorites: {articleId: documentId}}});
 
         res.json('Removed');
     } else if (req.session.user && !document) {
-        await User.updateOne({$push: {favorites: {articleId: documentId}}});
+        await User.updateOne({_id: req.session.user._id}, {$push: {favorites: {articleId: documentId}}});
 
         res.json('Added');
     } else {
@@ -53,7 +53,9 @@ exports.favoriteArticle = async (req, res, next) => {
 
 exports.likeArticle = async (req, res, next) => {
     const documentId = req.query.articleId;
-    const document = await User.findOne({_id: req.session.user._id}, {liked: {articleId: documentId}});
+    const document = await User.findOne({_id: req.session.user._id, liked: {articleId: documentId}});
+
+    console.log(document);
 
     if (req.session.user && document) {
         await User.updateOne({_id: req.session.user._id}, {$pull: {liked: {articleId: documentId}}});

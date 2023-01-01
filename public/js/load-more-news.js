@@ -81,23 +81,6 @@ function generateHtmlForArticle(articles, article, userData) {
 
     article.date = new Date(article.date).toDateString();
 
-    /*
-<!-- prettier-ignore -->
-                    <% if (user && user.favorites.includes(article._id)) {%>
-                    <button type="button" class="article__likes"><i class="fa-solid fa-heart"></i></button>
-                    <% } else { %>
-                    <button type="button" class="article__likes"><i class="fa-regular fa-heart"></i></button>
-                    <% } %>
-                    <!-- prettier-ignore -->
-                    <% if (user && user.liked.includes(article._id)) {%>
-                    <button type="button" class="article__favorites"><i class="fa-solid fa-star"></i></button>
-                    <% } else { %>
-                    <button type="button" class="article__favorites"><i class="fa-regular fa-star"></i></button>
-                    <% } %>
-    */
-
-    // <% if (user && user.liked.some(id => id.articleId == article.id)) {%>
-
     newArticle.innerHTML = `
     <div class="article__header">
     ${article.image ? '<img class="article__pictureLink"/>' : '<div class="article__pictureLink"></div>'}
@@ -125,6 +108,23 @@ function generateHtmlForArticle(articles, article, userData) {
     <img class="articles__img" src="${article.image}" alt="" />
     <h2 href="#" class="articles__article-title">${article.title}</h2>
     <a href="${article.href}" class="doc-${article._id} articles__link button button--small">Learn more</a>
+    <button class="doc-${article.id} button button--small button__comments">Comments</button>
+    <div class="modal hidden" id="modal">
+        <button class="button button--small modal__close">&times;</button>
+        <div class="modal__comments"></div>
+        <div class="modal__new">
+            <textarea
+                id="articleContent"
+                name="articleContent"
+                class="modal__input"
+                required
+                contenteditable
+                style="resize: none; overflow: hidden; min-height: 8rem; height: max-content"
+            ></textarea>
+            <button class="button button--small modal__new_comment">Comment</button>
+        </div>
+    </div>
+    <div class="overlay hidden" id="overlay"></div>
         `;
 
     articles.appendChild(newArticle);
