@@ -53,5 +53,7 @@ router.get('/api/load-more-news', articleHelpers.loadMoreNews);
 router.get('/api/get-user-info', articleHelpers.getUserInfo);
 router.get('/api/like', articleHelpers.likeArticle);
 router.get('/api/favorite', articleHelpers.favoriteArticle);
+router.get('/api/get-comments', articleHelpers.getComments);
+router.get('/api/comment', articleHelpers.comment);
 
 module.exports = router;

@@ -129,6 +129,10 @@ body {
     flex-direction: column;
 }
 
+body.overflow {
+    overflow: hidden;
+}
+
 .main {
     display: flex;
     flex-direction: column;

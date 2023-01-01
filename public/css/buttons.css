@@ -99,3 +99,15 @@
     background-color: var(--red-100);
     outline: none;
 }
+
+.button__comments {
+    margin-top: 0.5rem;
+    background: var(--neutral-900);
+    color: var(--neutral-50);
+}
+
+.button__comments:hover,
+.button__comments:active,
+.button__comments:focus {
+    background-color: var(--neutral-750);
+}

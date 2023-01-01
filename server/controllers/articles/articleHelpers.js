@@ -53,17 +53,48 @@ exports.favoriteArticle = async (req, res, next) => {
 
 exports.likeArticle = async (req, res, next) => {
     const documentId = req.query.articleId;
-    const document = await User.findOne({liked: {articleId: documentId}});
+    const document = await User.findOne({_id: req.session.user._id}, {liked: {articleId: documentId}});
 
     if (req.session.user && document) {
-        await User.updateOne({$pull: {liked: {articleId: documentId}}});
+        await User.updateOne({_id: req.session.user._id}, {$pull: {liked: {articleId: documentId}}});
 
         res.json('Removed');
     } else if (req.session.user && !document) {
-        await User.updateOne({$push: {liked: {articleId: documentId}}});
+        await User.updateOne({_id: req.session.user._id}, {$push: {liked: {articleId: documentId}}});
 
         res.json('Added');
     } else {
         res.json('User is not logged in');
+    }
+};
+
+exports.getComments = async (req, res, next) => {
+    const documentId = req.query.articleId;
+    const document = await NewsArticle.findOne({_id: documentId})
+        .populate({
+            path: 'comments.author',
+            model: 'User',
+        })
+        .exec();
+
+    res.json(document.comments);
+};
+
+exports.comment = async (req, res, next) => {
+    const documentId = req.query.articleId;
+    const comment = req.query.comment;
+
+    if (!req.session.user) {
+        res.json('User not found');
+    } else if (comment.length > 50) {
+        res.json('Length overflow');
+    } else {
+        const commentObject = {
+            author: req.session.user._id,
+            value: comment,
+        };
+
+        await NewsArticle.updateOne({_id: documentId}, {$push: {comments: commentObject}});
+        res.json('Added');
     }
 };
