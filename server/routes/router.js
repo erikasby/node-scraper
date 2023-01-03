@@ -55,5 +55,6 @@ router.get('/api/like', articleHelpers.likeArticle);
 router.get('/api/favorite', articleHelpers.favoriteArticle);
 router.get('/api/get-comments', articleHelpers.getComments);
 router.get('/api/comment', articleHelpers.comment);
+router.get('/api/update-article', articleHelpers.updateArticle);
 
 module.exports = router;

@@ -19,8 +19,6 @@ const renderArticles = async (req, res, next, path, title) => {
 
         if (req.session.user) user = await User.findOne({_id: req.session.user._id});
 
-        console.log(user);
-
         // let lastArticleId;
         // if (newsArticles.length > 0) lastArticleId = newsArticles[newsArticles.length - 1].date;
 
@@ -33,7 +31,7 @@ const renderArticles = async (req, res, next, path, title) => {
         // zalando.getData();
 
         res.render('articles', {
-            title: title + ' | BayBank - the best solution for both individuals and companies',
+            title: title + ' | NodeScraper',
             path: path,
             active: title,
             articles: newsArticles,

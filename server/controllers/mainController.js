@@ -23,12 +23,7 @@ for (let i = 0; i < headings.length; i++) {
 // GET Home
 exports.getIndex = async (req, res, next) => {
     try {
-        res.render('index', {
-            title: 'Home' + ' | BayBank - the best solution for both individuals and companies',
-            path: '/',
-            active: 'Home',
-            cards: cards,
-        });
+        res.redirect('/news');
     } catch (error) {
         res.render('404', {
             title: '404',

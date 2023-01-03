@@ -88,7 +88,7 @@ exports.comment = async (req, res, next) => {
 
     if (!req.session.user) {
         res.json('User not found');
-    } else if (comment.length > 50) {
+    } else if (comment.length < 1 && comment.length > 50) {
         res.json('Length overflow');
     } else {
         const commentObject = {
@@ -98,5 +98,20 @@ exports.comment = async (req, res, next) => {
 
         await NewsArticle.updateOne({_id: documentId}, {$push: {comments: commentObject}});
         res.json('Added');
+    }
+};
+
+exports.updateArticle = async (req, res, next) => {
+    const documentId = req.query.articleId;
+    const title = req.query.title;
+    const image = req.query.image;
+
+    if (!req.session.user) {
+        res.json('User not found');
+    } else if (!req.session.user.role == 'admin') {
+        res.json('User is not admin');
+    } else {
+        await NewsArticle.updateOne({_id: documentId}, {title: title, image: image});
+        res.json('Updated');
     }
 };
