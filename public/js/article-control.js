@@ -12,34 +12,48 @@ articlesComponent.addEventListener('click', async (e) => {
     if (clickedButton.className.includes('heart')) {
         const article = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
         let learnMoreButton;
-        if (userData.role == 'admin') learnMoreButton = article.children[4];
-        else learnMoreButton = article.children[3];
-        const documentId = learnMoreButton.className.split(' ')[0].split('-')[1];
 
-        const url = `/api/like?articleId=${documentId}`;
-        const res = await fetch(url);
-        const data = await res.json();
+        if (userData == 'User not found') {
+            fixedErrorMessage('User is not logged in');
+        } else {
+            if (userData.role == 'admin') learnMoreButton = article.children[4];
+            else learnMoreButton = article.children[3];
+            const documentId = learnMoreButton.className.split(' ')[0].split('-')[1];
 
-        if (data === 'Added') {
-            clickedButton.className = 'fa-solid fa-heart';
-        } else if (data === 'Removed') {
-            clickedButton.className = 'fa-regular fa-heart';
+            const url = `/api/like?articleId=${documentId}`;
+            const res = await fetch(url);
+            const data = await res.json();
+
+            if (data === 'Added') {
+                clickedButton.className = 'fa-solid fa-heart';
+                fixedErrorMessage('Liked');
+            } else if (data === 'Removed') {
+                clickedButton.className = 'fa-regular fa-heart';
+                fixedErrorMessage('Unliked');
+            }
         }
     } else if (clickedButton.className.includes('star')) {
         const article = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
         let learnMoreButton;
-        if (userData.role == 'admin') learnMoreButton = article.children[4];
-        else learnMoreButton = article.children[3];
-        const documentId = learnMoreButton.className.split(' ')[0].split('-')[1];
 
-        const url = `/api/favorite?articleId=${documentId}`;
-        const res = await fetch(url);
-        const data = await res.json();
+        if (userData == 'User not found') {
+            fixedErrorMessage('User is not logged in');
+        } else {
+            if (userData.role == 'admin') learnMoreButton = article.children[4];
+            else learnMoreButton = article.children[3];
+            const documentId = learnMoreButton.className.split(' ')[0].split('-')[1];
 
-        if (data === 'Added') {
-            clickedButton.className = 'fa-solid fa-star';
-        } else if (data === 'Removed') {
-            clickedButton.className = 'fa-regular fa-star';
+            const url = `/api/favorite?articleId=${documentId}`;
+            const res = await fetch(url);
+            const data = await res.json();
+
+            if (data === 'Added') {
+                clickedButton.className = 'fa-solid fa-star';
+                fixedErrorMessage('Favorited');
+            } else if (data === 'Removed') {
+                clickedButton.className = 'fa-regular fa-star';
+                fixedErrorMessage('Unfavorited');
+            }
         }
     } else if (clickedButton.className.includes('button__comments')) {
         const article = e.target.parentElement;
@@ -51,7 +65,7 @@ articlesComponent.addEventListener('click', async (e) => {
             modal = article.children[6];
             overlay = article.children[7];
         } else {
-            learnMoreButton = article.children[4];
+            learnMoreButton = article.children[3];
             modal = article.children[5];
             overlay = article.children[6];
         }
@@ -126,13 +140,17 @@ articlesComponent.addEventListener('click', async (e) => {
         const documentId = learnMoreButton.className.split(' ')[0].split('-')[1];
         const commentValue = e.target.parentElement.children[0].value;
 
+        console.log(commentValue);
+
         if (commentValue.length > 0 && commentValue.length <= 50) {
             const url = `/api/comment?articleId=${documentId}&comment=${commentValue}`;
             const res = await fetch(url);
             const data = await res.json();
 
             if (data == 'User not found') {
+                fixedErrorMessage('User is not logged in');
             } else if (data == 'Length overflow') {
+                fixedErrorMessage('Comment can be min 1 or max 50 characters');
             } else if (data == 'Added') {
                 const url = `/api/get-user-info`;
                 const res = await fetch(url);
@@ -181,10 +199,14 @@ articlesComponent.addEventListener('click', async (e) => {
         const data = await res.json();
 
         if (data == 'User not found') {
+            fixedErrorMessage('User is not logged in');
         } else if (data == 'User is not admin') {
+            fixedErrorMessage('User is not logged in as admin');
         } else if (data == 'Updated') {
             title.innerText = newTitle;
             image.src = newImage;
+
+            fixedErrorMessage('Updated');
 
             modal.classList.toggle('hidden');
             overlay.classList.toggle('hidden');
@@ -208,4 +230,15 @@ function generateHtmlForComments(commentsComponent, comments) {
     });
 
     commentsComponent.innerHTML = html;
+}
+
+function fixedErrorMessage(message) {
+    const errorComponent = document.querySelector('.fixed_error_message');
+
+    console.log(errorComponent);
+
+    errorComponent.innerText = message;
+    errorComponent.classList.toggle('hidden');
+
+    setTimeout(() => errorComponent.classList.toggle('hidden'), 2000);
 }

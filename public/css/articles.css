@@ -233,6 +233,10 @@
     color: var(--red-500);
 }
 
+.article__delete.hidden {
+    display: none;
+}
+
 .article__title {
     font-size: 1.9rem;
     color: var(--neutral-950);
@@ -410,6 +414,23 @@
 .comment__username {
     font-weight: 500;
     color: var(--blue-500);
+}
+
+.fixed_error_message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    position: fixed;
+    width: 100%;
+    height: 2rem;
+    background-color: var(--red-500);
+    color: var(--neutral-50);
+    z-index: 11;
+}
+
+.fixed_error_message.hidden {
+    display: none;
 }
 
 @media screen and (max-width: 42rem) {

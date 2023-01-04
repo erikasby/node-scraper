@@ -53,18 +53,20 @@ exports.favoriteArticle = async (req, res, next) => {
 
 exports.likeArticle = async (req, res, next) => {
     const documentId = req.query.articleId;
-    const document = await User.findOne({_id: req.session.user._id, liked: {articleId: documentId}});
+    let document;
 
-    console.log(document);
+    if (req.session.user) {
+        document = await User.findOne({_id: req.session.user._id, liked: {articleId: documentId}});
 
-    if (req.session.user && document) {
-        await User.updateOne({_id: req.session.user._id}, {$pull: {liked: {articleId: documentId}}});
+        if (document) {
+            await User.updateOne({_id: req.session.user._id}, {$pull: {liked: {articleId: documentId}}});
 
-        res.json('Removed');
-    } else if (req.session.user && !document) {
-        await User.updateOne({_id: req.session.user._id}, {$push: {liked: {articleId: documentId}}});
+            res.json('Removed');
+        } else if (!document) {
+            await User.updateOne({_id: req.session.user._id}, {$push: {liked: {articleId: documentId}}});
 
-        res.json('Added');
+            res.json('Added');
+        }
     } else {
         res.json('User is not logged in');
     }

@@ -75,6 +75,104 @@ async function loadMoreNews() {
 //         .split('-')[1];
 // }
 
+{
+    /* <article class="articles__article">
+    <% if (user && user.role == 'admin') { %>
+    <div class="article__admin">
+        <div class="article__edit"><i class="fa-solid fa-pen-to-square"></i></div>
+        <!-- <div class="article__delete"><i class="fa-solid fa-trash"></i></div> -->
+        <div class="edit_modal hidden">
+            <button class="button button--small edit_modal__close">&times;</button>
+            <div class="modal__data">
+                <div class="modal__image">Image link:</div>
+                <input
+                        type="text"
+                        id="image"
+                        name="image"
+                        class="form__input"
+                        value="<%= article.image %>"
+                        required
+                    >
+                </input>
+                <div class="modal__title">Title:</div>
+                <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        class="form__input"
+                        value="<%= article.title %>"
+                        required
+                    >
+                </input>
+            </div>
+            <button class="button button--small modal__update">Update</button>
+        </div>
+        <div class="edit_overlay hidden"></div>
+    </div>
+    <% } %>
+    <div class="article__header">
+        <% if (!article) { %>
+        <img class="article__pictureLink" src="<%= article.image %>" alt="Profile picture" />
+        <% } else { %>
+        <div class="article__pictureLink"></div>
+        <% } %>
+        <div class="article__data">
+            <div class="article__split article__options">
+                <p class="article__username"><%= article.company %></p>
+                <div class="article__additionals">
+                    <!-- prettier-ignore -->
+                    <% if (user) {%>
+                    <% if (user.liked.some(id => id.articleId == article.id)) { %>
+                    <button type="button" class="article__likes"><i class="fa-solid fa-heart"></i></button>
+                    <% } else { %>
+                    <button type="button" class="article__likes"><i class="fa-regular fa-heart"></i></button>
+                    <% } %>
+                    <!-- prettier-ignore -->
+                    <% } else { %>
+                    <button type="button" class="article__likes"><i class="fa-regular fa-heart"></i></button>
+                    <% } %>
+                    <!-- prettier-ignore -->
+                    <% if (user) { %>
+                    <% if (user.favorites.some(id => id.articleId == article.id)) { %>
+                    <button type="button" class="article__favorites"><i class="fa-solid fa-star"></i></button>
+                    <% } else { %>
+                    <button type="button" class="article__favorites"><i class="fa-regular fa-star"></i></button>
+                    <% } %>
+                    <!-- prettier-ignore -->
+                    <% } else { %>
+                    <button type="button" class="article__favorites"><i class="fa-regular fa-star"></i></button>
+                    <% } %>
+                </div>
+            </div>
+            <div class="article__split">
+                <p class="article__updatedAt"><%= article.date.toDateString() %></p>
+            </div>
+        </div>
+    </div>
+    <img class="articles__img" src="<%= article.image %>" alt="" />
+    <h2 href="#" class="articles__article-title"><%= article.title %></h2>
+    <a href="<%= article.href %>" class="doc-<%= article.id %> articles__link button button--small">Learn more</a>
+    <button class="doc-<%= article.id %> button button--small button__comments">Comments</button>
+    <div class="comment_modal hidden">
+        <button class="button button--small comment_modal__close">&times;</button>
+        <div class="modal__comments"></div>
+        <div class="modal__new">
+            <textarea
+                id="articleContent"
+                name="articleContent"
+                class="modal__input"
+                required
+                contenteditable
+                maxlength="50"
+                style="resize: none; overflow: hidden; min-height: 8rem; height: max-content"
+            ></textarea>
+            <button class="button button--small modal__new_comment">Comment</button>
+        </div>
+    </div>
+    <div class="comment_overlay hidden"></div>
+</article> */
+}
+
 function generateHtmlForArticle(articles, article, userData) {
     const newArticle = document.createElement('article');
     newArticle.classList.add('articles__article');
@@ -82,6 +180,43 @@ function generateHtmlForArticle(articles, article, userData) {
     article.date = new Date(article.date).toDateString();
 
     newArticle.innerHTML = `
+    ${
+        userData && userData.role == 'admin'
+            ? `
+    <div class="article__admin">
+            <div class="article__edit"><i class="fa-solid fa-pen-to-square"></i></div>
+            <div class="article__delete hidden"><i class="fa-solid fa-trash"></i></div>
+            <div class="edit_modal hidden">
+                <button class="button button--small edit_modal__close">&times;</button>
+                <div class="modal__data">
+                    <div class="modal__image">Image link:</div>
+                    <input
+                            type="text"
+                            id="image"
+                            name="image"
+                            class="form__input"
+                            value="${article.image}"
+                            required
+                        >
+                    </input>
+                    <div class="modal__title">Title:</div>
+                    <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            class="form__input"
+                            value="${article.title}"
+                            required
+                        >
+                    </input>
+                </div>
+                <button class="button button--small modal__update">Update</button>
+            </div>
+            <div class="edit_overlay hidden"></div>
+    </div>
+    `
+            : ``
+    }
     <div class="article__header">
     ${article.image ? '<img class="article__pictureLink"/>' : '<div class="article__pictureLink"></div>'}
         <div class="article__data">
@@ -109,8 +244,8 @@ function generateHtmlForArticle(articles, article, userData) {
     <h2 href="#" class="articles__article-title">${article.title}</h2>
     <a href="${article.href}" class="doc-${article._id} articles__link button button--small">Learn more</a>
     <button class="doc-${article.id} button button--small button__comments">Comments</button>
-    <div class="modal hidden" id="modal">
-        <button class="button button--small modal__close">&times;</button>
+    <div class="comment_modal hidden">
+        <button class="button button--small comment_modal__close">&times;</button>
         <div class="modal__comments"></div>
         <div class="modal__new">
             <textarea
@@ -119,12 +254,13 @@ function generateHtmlForArticle(articles, article, userData) {
                 class="modal__input"
                 required
                 contenteditable
+                maxlength="50"
                 style="resize: none; overflow: hidden; min-height: 8rem; height: max-content"
             ></textarea>
             <button class="button button--small modal__new_comment">Comment</button>
         </div>
     </div>
-    <div class="overlay hidden" id="overlay"></div>
+    <div class="comment_overlay hidden"></div>
         `;
 
     articles.appendChild(newArticle);
