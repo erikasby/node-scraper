@@ -6,7 +6,7 @@
   </a>
 </p>
 
-> node-scraper - this was the project for my bachelor's.
+> node-scraper. Project moved to: github.com/erikasby/eas
 
 ## Install
 
